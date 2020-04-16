@@ -1,45 +1,90 @@
-import loadJS from 'load-js'
-let player = undefined
+import { getSpotifyAuthToken } from '../helpers/localStorageToken'
 
-const initPlayer = () => {
-  if (player) return Promise.resolve(player)
+export const connectToPlayer = (spotifyPlayer, dispatch) => {
+    let connectToPlayerTimeout
+  if (spotifyPlayer) {
+    console.log('connectToPlayer')
+    clearTimeout(connectToPlayerTimeout)
+    // Ready
+    spotifyPlayer.addListener('ready', ({device_id}) => {
+      const result = {
+        device_id,
+        playerReady: true
+      }
 
-  player = new Spotify.Player({
-    name: 'Web Playback SDK Quick Start Player',
-    getOAuthToken: callback => {
-      callback('BQD7gssaBFpBVntoOLzTBBkxNkUrUO3ijCKCJZkKhcINqqiZKYlTvgrehwM0sCyrgz_EmMgCMP4KWRESCgpFWyhrQq8Dv2H8X9BQyDdW8_uboMZeMTb8GN9QkMGk36AXdE3sNTavvKAR2y0VWU_UBprhFwN-PGxO1YK5QnqxpUqZ-S2MpLjhhgugR9uoea7-DZxFKHUhC4Kmt85eTo3tTV6Wb0h8WQbQT-zTBeFjddwM78n2RCkwVb21z-1HQKN1XIH3pYHpMLVgjIqYXZSuSl7rseFxeg6p6Q')
-    },
-    volume: .5
-  })
-
-  // Ready
-  player.addListener('ready', ({device_id}) => {
-    console.log('Ready with Device ID ----', device_id)
-    return Promise.resolve(player)
-  })
-  // Playback status updates
-  player.addListener('player_state_changed', state => {
-    console.log('Playback status updates',state)
-  })
-
-  // Connect to the player!
-  player.connect().then(success => {
-    if (success) {
-      console.log('The Web Playback SDK successfully connected to Spotify!')
-    }
-  })
-}
-
-const initSpotify = function() {
-  // Define callback
-  window.onSpotifyWebPlaybackSDKReady = initPlayer
-  return loadJS(['https://sdk.scdn.co/spotify-player.js'])
-}
-
-export default () => {
-  return initSpotify()
-    .then(() => {
-      return initPlayer()
+      dispatch({ type: 'DEVICE_PLAYER_ID', result})
     })
-    .catch(e => console.warn(e))
+
+    // Not Ready
+    spotifyPlayer.addListener('not_ready', ({device_id}) => {
+      console.log('Device ID has gone offline', device_id)
+    })
+
+    spotifyPlayer.connect()
+    .then(success  => {
+      console.log('success ',success)
+      console.log("connected to player")
+    })
+  } else {
+    connectToPlayerTimeout = setTimeout(connectToPlayer(), 1000)
+  }
+}
+
+export const hideButton = e => {
+  if(document.querySelector('.btn.active')) {
+    document.querySelector('.btn.active').classList.remove('active')
+  }
+}
+
+export const showButton = e => {
+  hideButton()
+  e.target.parentElement.classList.add('active')
+}
+
+export const startPlayback = (e, id, spotify_uri) => {
+  showButton(e)
+
+  fetch(`https://api.spotify.com/v1/me/player/play?device_id=${id}`, {
+    method: 'PUT',
+    body: JSON.stringify({ uris: [spotify_uri] }),
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${getSpotifyAuthToken()}`
+    }
+  }).then(data => {
+    if (data.status === 403) {
+      console.log('loadingState: "you need to upgrade to premium for playback"')
+    } else {
+      //console.log(data)
+    }
+  }).catch(error => {
+    console.log(error)
+  })
+}
+
+export const pauseTrack = (e, device_id) => {
+  hideButton(e)    
+
+  fetch("https://api.spotify.com/v1/me/player/pause?" +
+    "device_id=" + device_id, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${getSpotifyAuthToken()}`
+    },
+  }).then(() => {
+    //setPlaybackPaused(true)
+  })
+}
+
+export const resumePlayback = (e, device_id) => {
+  fetch("https://api.spotify.com/v1/me/player/play", {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${getSpotifyAuthToken()}`
+    },
+  }).then(() => {
+    //setPlaybackPaused(false)
+  })
 }
