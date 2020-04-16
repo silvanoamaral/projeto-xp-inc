@@ -5,10 +5,12 @@ import axios from 'axios'
 import { ScriptCache } from '../../utils/ScriptCache'
 import { msConversion } from '../../utils/msConversion'
 import { getSpotifyAuthToken } from '../../helpers/localStorageToken'
+import BackButton from '../../components/BackButton'
+
 import {
   connectToPlayer,
   startPlayback,
-  pauseTrack
+  pauseTrack,
 } from '../../utils/spotify'
 
 import './AlbumScreen.scss'
@@ -18,7 +20,6 @@ const AlbumScreen = props => {
     data,
     playlist_id,
     playlist_name,
-    playerReady,
     device_id,
     history,
     dispatch
@@ -66,7 +67,6 @@ const AlbumScreen = props => {
         dispatch({type: 'SEARCH_SESSION_EXPIRES'})
       }
 
-      console.log('initGetPlayList', res.data)
       setPlaylists(res.data)
 
       connectToPlayer(spotifyPlayer, dispatch)
@@ -92,30 +92,48 @@ const AlbumScreen = props => {
   },[])
 
   return (
-    <>
-      <h1>{playlist_name}</h1>
+    <div className='playlists'>
+      <BackButton
+        onClick={
+          (e) => pauseTrack(e, device_id)
+        }
+      />
 
       {playlists && <>
-        <ul>
-          {playlists.items.map((play, index) => {
-            return <li key={`${play.track.name}-${index}`}>
-              <p><span>{index}.</span> <span>{play.track.name}</span></p>
-              <p>Duration: {msConversion(play.track.duration_ms)}</p>
+        <div className="list">
+          <div className="details">
+            <div className="images"></div>
+            <strong>{playlist_name}</strong>
+            <p>Nome do artista grande de duas linhas</p>
+          </div>
+          <ul>
+            {playlists.items.map((play, index) => {
+              return <li key={`${play.track.name}-${index}`}>
+                <p><span>{index+1}.</span> <span>{play.track.name}</span></p>
 
-              <div className="btn">
-                <button data-position={index} className="btn__player" onClick={(e) => {
-                  startPlayback(e, device_id, play.track.uri)
-                }}>
-                  play
-                </button>
+                <div className="btn">
+                  <p className="duration">{msConversion(play.track.duration_ms)}</p>
+                  <button
+                    data-position={index}
+                    className="player"
+                    onClick={(e) => {
+                      startPlayback(e, device_id, play.track.uri)
+                    }}
+                  >play</button>
 
-                <button data-position={index} className="btn__pausa" onClick={(e) => pauseTrack(e, device_id)}>pausa</button>
-              </div>
-            </li>
-          })}
-        </ul>
+                  <button
+                    data-position={index}
+                    className="pause"
+                    onClick={
+                      (e) => pauseTrack(e, device_id)
+                    }>pause</button>
+                </div>
+              </li>
+            })}
+          </ul>
+        </div>
       </>}
-    </>
+    </div>
   )
 }
 

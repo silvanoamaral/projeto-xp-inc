@@ -77,7 +77,7 @@ export const pauseTrack = (e, device_id) => {
   })
 }
 
-export const resumePlayback = (e, device_id) => {
+export const resumePlayback = e => {
   fetch("https://api.spotify.com/v1/me/player/play", {
     method: 'PUT',
     headers: {
