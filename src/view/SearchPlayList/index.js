@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { connect } from 'react-redux'
 
 import { searchReducer, setIdPlayListReducer } from '../../redux/actions'
+import CardPlayer from '../../components/CardPlayer'
 
 import './SearchPlayList.scss'
 
@@ -24,19 +24,11 @@ const SearchPlayList = props => {
     setSearch(data.search)
   }
 
-  const normalizeURL = str => {
-    if(str) {
-      return str.replace(/\s+/g, '-').toLowerCase()
-    } else {
-      return query.replace(/\s+/g, '-').toLowerCase()
-    }
-  }
-
   const onclickSetId = (id, name) => {
     setIdPlayListReducer(id, name)
   }
 
-  return <div className=''>
+  return <>
     <form onSubmit={handleSubmit(onSubmit)}>
       <h3>Spotify Player Will Go Here In the Next Step</h3>
       <input
@@ -47,21 +39,15 @@ const SearchPlayList = props => {
       />
       <input type='submit' value={loading ? 'Buscando...' : 'Enviar'} />
     </form>
-    {data && <ul>
-      {data.items.map(item => {
-        return <li key={`${item.name} -${Math.random()}`} onClick={() => onclickSetId(item.id, item.name)}>
-          <Link to={`/albums/${normalizeURL(search)}`}
-            data-url={item.uri}
-          >
-            <img src={item.images[0].url} alt={item.name} />
-            <p>{item.name}</p>
-          </Link>
-        </li>
-      })
-      }
-    </ul>
+    {data &&
+      <CardPlayer
+        data={data}
+        search={search}
+        query={query}
+        onClick={onclickSetId}
+      />
     }
-  </div>
+  </>
 }
 
 const mapStateToProps = store => ({

@@ -4,14 +4,24 @@ header {
   align-items: center;
   padding: 10px 0;
   margin: 0;
-  border-bottom: 0.5px solid #efefef;
 
   @media (min-width: 768px) {
     margin-bottom: 25px;
   }
 
   img {
-    width: 160px;
-    height: 37px;
+    width: 300px;
+  }
+
+  h1:before {
+    content: '';
+    background: #fff;
+    width: 34px;
+    height: 30px;
+    position: absolute;
+    top: 2px;
+    z-index: -1;
+    left: 8px;
+    border-radius: 40px;
   }
 }

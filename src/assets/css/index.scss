@@ -10,7 +10,7 @@
 }
 
 body {
-  background: $white-color;
+  background: $bg-color;
 }
 
 a {
@@ -20,7 +20,8 @@ a {
 .container {
   width: 100%;
   max-width: 1200px;
-  margin: 0 auto;  
+  margin: 0 auto;
+  position: relative;
 }
 
 .content {
@@ -37,49 +38,6 @@ a {
       padding: 15px 0 25px 40px;
       font-size: 48px;
       line-height: 65px;
-    }
-  }
-}
-
-.chart {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  @media (min-width: 768px) {
-    justify-content: space-around;
-    flex-direction: row;
-  }
-
-  .row {
-    background: $white-color;
-    border: 1px solid $light-gray-color;
-    border-radius: 4px;
-    box-shadow: $shadow;
-    width: 85%;
-    padding: 15px;
-    margin-bottom: 30px;
-    min-height: 290px;
-
-    @media (min-width: 768px) {
-      margin: 0;
-      width: 40%;
-    }
-
-    strong {
-      color: $green-color;
-      display: block;
-      font-weight: 600;
-      font-size: 14px;
-      line-height: 20px;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-    }
-  }
-
-  &__line {
-    .row {
-      width: 70%;
     }
   }
 }

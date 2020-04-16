@@ -1,16 +1,16 @@
+@import '../../assets/css/variables.scss';
+
 footer {
-  border-top: .5px solid #000;
+  border-top: .5px solid $primary-color;
   width: 100%;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  background-color: #696969;
+  background-color: $black-color;
   height: 50px;
+  margin-top: 50px;
 
   p {
-    color: #fff;
+    color: $white-color;
     margin: 0 auto;
     font-size: 11px;
   }
