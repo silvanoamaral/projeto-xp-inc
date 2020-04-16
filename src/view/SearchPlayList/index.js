@@ -5,9 +5,9 @@ import { connect } from 'react-redux'
 
 import { searchReducer, setIdPlayListReducer } from '../../redux/actions'
 
-import './SerachPlayList.scss'
+import './SearchPlayList.scss'
 
-const SerachPlayList = props => {
+const SearchPlayList = props => {
   const { register, handleSubmit } = useForm()
   const [search, setSearch] = useState('')
 
@@ -75,4 +75,4 @@ const mapDispatchToProps = {
   setIdPlayListReducer
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SerachPlayList)
+export default connect(mapStateToProps, mapDispatchToProps)(SearchPlayList)
