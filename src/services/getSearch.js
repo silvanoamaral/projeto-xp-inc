@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const getSearch = async (token, query) => {
-  const urlBase = `https://api.spotify.com/v1/search?q=${query}&type=playlist&limit=21&offset=1`
+  const urlBase = `https://api.spotify.com/v1/search?q=${query}&type=playlist&limit=25&offset=1`
 
   const config = {
     headers: { Authorization: `Bearer ${token}` }

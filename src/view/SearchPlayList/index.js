@@ -12,7 +12,6 @@ const SearchPlayList = props => {
   const [search, setSearch] = useState('')
 
   const {
-    loading,
     searchReducer,
     data,
     query,
@@ -30,14 +29,13 @@ const SearchPlayList = props => {
 
   return <>
     <form onSubmit={handleSubmit(onSubmit)}>
-      <h3>Spotify Player Will Go Here In the Next Step</h3>
+      <h3>Busque por artistas, álbuns ou músicas</h3>
       <input
         type='text'
-        placeholder='Busque por artistas, álbuns ou músicas'
+        placeholder='Comece a escrever'
         name='search'
         ref={register({ required: true })}
       />
-      <input type='submit' value={loading ? 'Buscando...' : 'Enviar'} />
     </form>
     {data &&
       <CardPlayer

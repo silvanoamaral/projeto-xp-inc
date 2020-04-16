@@ -5,6 +5,10 @@ header {
   padding: 10px 0;
   margin: 0;
 
+  .container {
+    width: 100%;
+  }
+
   @media (min-width: 768px) {
     margin-bottom: 25px;
   }
@@ -13,15 +17,27 @@ header {
     width: 300px;
   }
 
-  h1:before {
-    content: '';
-    background: #fff;
-    width: 34px;
-    height: 30px;
-    position: absolute;
-    top: 2px;
-    z-index: -1;
-    left: 8px;
-    border-radius: 40px;
+  h1 {
+    padding-left: 15px;
+
+    @media (min-width: 768px) {
+      padding-left: 0;      
+    }
+
+    &:before {
+      content: '';
+      background: #fff;
+      width: 34px;
+      height: 30px;
+      position: absolute;
+      top: 3px;
+      z-index: -1;
+      left: 30px;
+      border-radius: 40px; 
+
+      @media (min-width: 768px) {
+        left: 15px;     
+      }
+    }
   }
 }

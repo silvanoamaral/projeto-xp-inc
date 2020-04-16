@@ -9,6 +9,10 @@
   font-family: $primary-font;
 }
 
+input:focus,
+button:focus {
+  outline: none;
+}
 body {
   background: $bg-color;
 }
@@ -18,9 +22,9 @@ a {
 }
 
 .container {
-  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 10px;
   position: relative;
 }
 
