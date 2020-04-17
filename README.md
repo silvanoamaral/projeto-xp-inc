@@ -49,3 +49,4 @@ After installing project dependencies, in the project directory you can run: `np
 Runs the app in the development mode.<br>
 Open [http://localhost:8002](http://localhost:8002) to view it in the browser
 
+![NewGIF](https://user-images.githubusercontent.com/24282267/79605283-fecd4700-80c5-11ea-9978-82c940385695.gif)

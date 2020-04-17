@@ -10,7 +10,7 @@ export default () => (
   <>
     <Switch>
       <Route path="/" exact component={Home} />
-      <Route path="/callback" exact component={Callback} />
+      <Route path="/callback" component={Callback} />
       <Route path="/albums/:playlist" exact component={AlbumScreen} />
       <Route path="*" component={NotFound} />
     </Switch>
