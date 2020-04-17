@@ -28,7 +28,6 @@ export class ScriptCache {
     return this.scriptTag(src)
     .then(() => {
       if (this.callbacks.hasOwnProperty(src)) {
-        console.log(this)
         this.callbacks[src]() // run a callback for this script if it exists
       }
       if (this.pending.length === 0 && this.onSuccess) {
@@ -36,11 +35,11 @@ export class ScriptCache {
       }
     })
     .catch(() => {
-      console.log("Loading " + src + " rejected")
+      //console.log("Loading " + src + " rejected")
     })
   }
 
-  scriptTag(src, cb) {
+  scriptTag(src) {
     return new Promise((resolve, reject) => {
       let resolved = false
       let errored = false
@@ -65,13 +64,13 @@ export class ScriptCache {
         }
       }
 
-      const handleLoad = (evt) => {
+      const handleLoad = () => {
           resolved = true
           this.pending.splice(this.pending.indexOf(src), 1)
           this.loaded.push(src)
           resolve(src)
       }
-      const handleReject = (evt) => {
+      const handleReject = () => {
           errored = true
           this.pending.splice(this.pending.indexOf(src), 1)
           this.failed.push(src)

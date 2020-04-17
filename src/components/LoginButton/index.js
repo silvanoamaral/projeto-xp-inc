@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import auth from '../../../app/auth/authPublicKey'
 
 import './LoginButton.scss'
@@ -17,3 +19,8 @@ const LoginButton = props => {
 }
 
 export default LoginButton
+
+LoginButton.propTypes = {
+  expires: PropTypes.bool,
+  text: PropTypes.string,
+}

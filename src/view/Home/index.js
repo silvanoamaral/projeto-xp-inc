@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import SearchPlayList from '../SearchPlayList'
 import LoginButton from '../../components/LoginButton'
@@ -25,3 +26,8 @@ const mapStateToProps = store => ({
 })
 
 export default connect(mapStateToProps)(Home)
+
+Home.propTypes = {
+  expires: PropTypes.bool,
+  text: PropTypes.string
+}

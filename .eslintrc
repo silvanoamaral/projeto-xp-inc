@@ -1,0 +1,51 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react"
+  ],
+  "parser": "babel-eslint",
+  "rules": {
+    "arrow-body-style": "off",
+    "wrap-iife": "off",
+    "comma-dangle": "off",
+    "no-plusplus": "off",
+    "indent": "off",
+    "strict": "off",
+    "no-undef": "off",
+    "no-console": "warn",
+    "semi": ["error", "never"],
+    "quotes": "off",
+    "curly": "off",
+    "nonblock-statement-body-position": "off",
+    "no-useless-constructor": "error",
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+  },
+  "settings": {
+    "react": {
+      "createClass": "createReactClass",
+      "pragma": "React",
+      "version": "16.4.1",
+      "flowVersion": "0.53"
+    },
+    "linkComponents": [
+      "Hyperlink",
+      {"name": "Link", "linkAttribute": "to"}
+    ]
+  }
+}

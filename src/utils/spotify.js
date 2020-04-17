@@ -3,7 +3,6 @@ import { getSpotifyAuthToken } from '../helpers/localStorageToken'
 export const connectToPlayer = (spotifyPlayer, dispatch) => {
     let connectToPlayerTimeout
   if (spotifyPlayer) {
-    console.log('connectToPlayer')
     clearTimeout(connectToPlayerTimeout)
     // Ready
     spotifyPlayer.addListener('ready', ({device_id}) => {
@@ -23,14 +22,13 @@ export const connectToPlayer = (spotifyPlayer, dispatch) => {
     spotifyPlayer.connect()
     .then(success  => {
       console.log('success ',success)
-      console.log("connected to player")
     })
   } else {
     connectToPlayerTimeout = setTimeout(connectToPlayer(), 1000)
   }
 }
 
-export const hideButton = e => {
+export const hideButton = () => {
   if(document.querySelector('.btn.active')) {
     document.querySelector('.btn.active').classList.remove('active')
   }
@@ -57,8 +55,8 @@ export const startPlayback = (e, id, spotify_uri) => {
     } else {
       //console.log(data)
     }
-  }).catch(error => {
-    console.log(error)
+  }).catch(() => {
+    //console.log(error)
   })
 }
 
@@ -77,7 +75,7 @@ export const pauseTrack = (e, device_id) => {
   })
 }
 
-export const resumePlayback = e => {
+export const resumePlayback = () => {
   fetch("https://api.spotify.com/v1/me/player/play", {
     method: 'PUT',
     headers: {

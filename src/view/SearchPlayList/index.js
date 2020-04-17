@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import { searchReducer, setIdPlayListReducer } from '../../redux/actions'
 import CardPlayer from '../../components/CardPlayer'
@@ -60,3 +61,10 @@ const mapDispatchToProps = {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchPlayList)
+
+SearchPlayList.propTypes = {
+  searchReducer: PropTypes.func,
+  setIdPlayListReducer: PropTypes.func,
+  data: PropTypes.object,
+  query: PropTypes.string
+}

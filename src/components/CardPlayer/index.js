@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import { normalizeURL } from '../../utils/normalizeURL'
 
@@ -24,3 +25,10 @@ const CardPlayer = props => {
 }
 
 export default CardPlayer
+
+CardPlayer.propTypes = {
+  query: PropTypes.string,
+  search: PropTypes.string,
+  data: PropTypes.object,
+  onClick: PropTypes.func
+}

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import './BackButton.scss'
 
@@ -10,3 +11,7 @@ const BackButton = props => {
 }
 
 export default BackButton
+
+BackButton.propTypes = {
+  onClick: PropTypes.func,
+}

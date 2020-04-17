@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import axios from 'axios'
 
 import { ScriptCache } from '../../utils/ScriptCache'
@@ -40,16 +41,6 @@ const AlbumScreen = props => {
         getOAuthToken: callback => {
           callback(localStorage.getItem('spotifyAuthToken'))
         }
-      })
-
-      spotifyPlayer.addListener('player_state_changed', ({
-        position,
-        duration,
-        track_window: { current_track }
-      }) => {
-        console.log('Currently Playing', current_track)
-        console.log('Position in Song', position)
-        console.log('Duration of Song', duration)
       })
     }
   }
@@ -146,3 +137,13 @@ const mapStateToProps = store => ({
 })
 
 export default connect(mapStateToProps)(AlbumScreen)
+
+AlbumScreen.propTypes = {
+  data: PropTypes.object,
+  playlist_id: PropTypes.string,
+  playlist_name: PropTypes.string,
+  device_id: PropTypes.string,
+  playerReady: PropTypes.bool,
+  history: PropTypes.object,
+  dispatch: PropTypes.func
+}
