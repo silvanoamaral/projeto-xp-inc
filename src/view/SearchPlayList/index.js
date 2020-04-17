@@ -29,7 +29,7 @@ const SearchPlayList = props => {
   }
 
   return <>
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className="search__form">
       <h3>Busque por artistas, álbuns ou músicas</h3>
       <input
         type='text'
