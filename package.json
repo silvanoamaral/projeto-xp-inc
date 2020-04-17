@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node app/server/index.js",
+    "server": "node app/server/index.js",
     "dev": "webpack-dev-server --config webpack/webpack.dev.js --open",
-    "start:dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run dev\" ",
+    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run dev\" ",
     "build": "webpack -p --config webpack/webpack.prod.js",
     "eslint-fix": "eslint --fix \"src/**/*.js\"",
     "test": "jest --coverage",

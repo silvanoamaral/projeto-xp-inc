@@ -1,9 +1,5 @@
 # Project XP Inc
 
-## Live demo (Prd)
-
-Project [here](https://projeto-xp-inc.herokuapp.com/)
-
 ## Developed With
 
 * React
@@ -49,4 +45,4 @@ After installing project dependencies, in the project directory you can run: `np
 Runs the app in the development mode.<br>
 Open [http://localhost:8002](http://localhost:8002) to view it in the browser
 
-![NewGIF](https://user-images.githubusercontent.com/24282267/79605283-fecd4700-80c5-11ea-9978-82c940385695.gif)
+![NewGIF (1)](https://user-images.githubusercontent.com/24282267/79607414-88324880-80c9-11ea-9508-953fa399f9df.gif)
