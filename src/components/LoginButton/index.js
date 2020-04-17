@@ -7,7 +7,7 @@ import './LoginButton.scss'
 
 const LoginButton = props => {
   const clientId = auth.clientID
-  const redirectUri = auth.redirectURI
+  const redirectUri = location.href+'callback'
   const scopes = [auth.scopes]
 
   return <a className='loginApp'
