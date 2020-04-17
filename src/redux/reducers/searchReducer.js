@@ -36,7 +36,7 @@ const searchReducer = (state = initialState, action) => {
       return {
         ...state,
         expires: true,
-        text: 'Sua sessão expirou, efetue o login novamente.',
+        text: 'Sua sessão expirou,',
         loading: false
       }
     default:
